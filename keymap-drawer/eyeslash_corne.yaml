@@ -92,7 +92,7 @@ layers:
   - {t: '3', s: '#'}
   - {t: ., s: '>'}
   - PG DN
-  - $$mdi:backspace-reverse-outline$$
+  - Alt+$$mdi:keyboard-tab$$
   - {type: held}
   - {t: D, h: '$$mdi:apple-keyboard-command$$'}
   - {t: '$$mdi:transfer$$', type: trans}
