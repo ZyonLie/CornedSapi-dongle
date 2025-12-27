@@ -80,7 +80,7 @@
 &trans  &kp PAGE_UP     &kp LC(LEFT_ARROW)  &kp UP_ARROW    &kp LC(RIGHT)    &kp LEFT_PARENTHESIS                     &trans          &kp ASTERISK  &kp N7  &kp N8     &kp N9  &kp LS(PLUS)  &kp BSPC
 &trans  &kp PAGE_DOWN   &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp RIGHT_PARENTHESIS            &trans  &trans  &trans  &kp FSLH      &kp N4  &kp N5     &kp N6  &kp MINUS     &kp PG_UP
 &trans  &kp KP_NUMLOCK  &none               &kp HOME        &kp INSERT       &kp PRINTSCREEN        &trans            &trans          &kp EQUAL     &kp N1  &kp N2     &kp N3  &kp DOT       &kp PG_DN
-                                            &kp DELETE      &trans           &kp LG(D)                                                &trans        &kp N0  &kp COMMA
+                                            &kp LA(TAB)     &trans           &kp LG(D)                                                &trans        &kp N0  &kp COMMA
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
