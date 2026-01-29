@@ -121,10 +121,10 @@
 
         GameR {
             bindings = <
-&trans  &kp N1  &kp N2  &trans  &kp N3  &kp N4                    &trans          &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp N5  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&to 0   &trans  &trans  &trans  &trans  &trans  &trans            &trans          &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans                                    &trans  &trans  &trans
+&kp TILDE  &kp N1  &kp N2  &trans  &kp N3  &kp N4                    &trans          &trans  &trans  &trans  &trans  &trans  &trans
+&trans     &kp N5  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&to 0      &trans  &trans  &trans  &trans  &trans  &trans            &trans          &trans  &trans  &trans  &trans  &trans  &trans
+                           &trans  &trans  &trans                                    &trans  &trans  &trans
             >;
         };
     };
