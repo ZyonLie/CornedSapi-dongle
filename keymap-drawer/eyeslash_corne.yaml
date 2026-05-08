@@ -239,7 +239,7 @@ layers:
   - {t: ., s: '>'}
   - {t: /, s: '?'}
   - {t: '''', s: '"'}
-  - LGUI
+  - $$mdi:apple-keyboard-option$$
   - GameR
   - $$mdi:keyboard-space$$
   - {t: '$$mdi:transfer$$', type: trans}
