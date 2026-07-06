@@ -1,6 +1,6 @@
 layout: {zmk_keyboard: eyeslash_corne}
 layers:
-  QWERTY:
+  Alpha:
   - $$mdi:keyboard-tab$$
   - Q
   - W
@@ -44,12 +44,12 @@ layers:
   - {t: /, s: '?'}
   - {t: '''', s: '"'}
   - {t: '$$mdi:keyboard-esc$$', h: '$$mdi:apple-keyboard-option$$'}
-  - NUMBER
+  - Num
   - $$mdi:keyboard-space$$
   - {t: '$$mdi:keyboard-return$$', type: enter}
-  - SYMBOL
+  - Sym
   - $$mdi:apple-keyboard-command$$
-  NUMBER:
+  Num:
   - {t: '$$mdi:transfer$$', type: trans}
   - PgUp
   - Ctl+$$mdi:arrow-left-bold$$
@@ -98,7 +98,7 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '0', s: )}
   - {t: ',', s: <}
-  SYMBOL:
+  Sym:
   - {t: '$$mdi:transfer$$', type: trans}
   - F1
   - F2
@@ -274,7 +274,7 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-  - {t: QWERTY, h: toggle}
+  - {t: Alpha, h: toggle}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
