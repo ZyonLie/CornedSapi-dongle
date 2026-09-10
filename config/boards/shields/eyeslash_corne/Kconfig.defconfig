@@ -1,7 +1,7 @@
 if SHIELD_EYESLASH_CORNE_CENTRAL_DONGLE
 
 config ZMK_KEYBOARD_NAME
-    default "CornedSapi-Dunkel"
+    default "Corne-Dongle"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
