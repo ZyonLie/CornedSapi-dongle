@@ -37,8 +37,5 @@ manifest:
     - name: zmk-dongle-display
       remote: englmaxi
       revision: v0.3
-    - name: nice-view-battery                  
-      remote: infely                           
-      revision: main  
   self:
     path: config
