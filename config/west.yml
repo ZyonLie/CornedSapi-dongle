@@ -33,9 +33,9 @@ manifest:
     - name: hammerbeam-slideshow
       remote: gpeye
       revision: main
-    - name: prospector-zmk-module
-      remote: tokyo2006
-      revision: change_spi2
+    #- name: prospector-zmk-module
+    #  remote: tokyo2006
+    #  revision: change_spi2
     - name: zmk-dongle-display
       remote: englmaxi
       revision: v0.3
