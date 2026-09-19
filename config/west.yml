@@ -2,8 +2,8 @@ manifest:
   remotes:
     - name: cormoran
       url-base: https://github.com/cormoran
-    - name: gpeye
-      url-base: https://github.com/GPeye
+    #- name: gpeye
+    #  url-base: https://github.com/GPeye
     - name: tokyo2006
       url-base: https://github.com/tokyo2006
     - name: englmaxi
@@ -30,9 +30,9 @@ manifest:
     - name: zmk-module-runtime-input-processor
       remote: cormoran
       revision: zmk-v0.3.0.0
-    - name: hammerbeam-slideshow
-      remote: gpeye
-      revision: main
+    #- name: hammerbeam-slideshow
+    #  remote: gpeye
+    #  revision: main
     #- name: prospector-zmk-module
     #  remote: tokyo2006
     #  revision: change_spi2
