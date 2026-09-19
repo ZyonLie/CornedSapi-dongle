@@ -6,15 +6,15 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#define DISPLAY_VIRTUAL_WIDTH  32
-#define DISPLAY_VIRTUAL_HEIGHT 128
+#define DISPLAY_VIRTUAL_WIDTH  128
+#define DISPLAY_VIRTUAL_HEIGHT 64
 #define DISPLAY_HW_WIDTH       128
-#define DISPLAY_HW_HEIGHT      32
-#define DISPLAY_ROTATION       90
-#define DISPLAY_ROTATION_DEGREES 90
-#define SCYAN_ROTATION         90
-#ifndef CONFIG_SCYAN_ROTATION_90
-#define CONFIG_SCYAN_ROTATION_90 1
+#define DISPLAY_HW_HEIGHT      64
+#define DISPLAY_ROTATION       0
+#define DISPLAY_ROTATION_DEGREES 0
+#define SCYAN_ROTATION         0
+#ifndef CONFIG_SCYAN_ROTATION_0
+#define CONFIG_SCYAN_ROTATION_0 1
 #endif
 #define DISPLAY_VIRTUAL_WIDTH_PERIPHERAL  32
 #define DISPLAY_VIRTUAL_HEIGHT_PERIPHERAL 128
@@ -42,9 +42,9 @@
 #define SCYAN_IDLE_SCREENS_ENABLED_CENTRAL  1
 #define SCYAN_IDLE_TIMEOUT_MS_CENTRAL       30000
 #define SCYAN_SLEEP_TIMEOUT_MS_CENTRAL      60000
-#define SCYAN_IDLE_SCREENS_ENABLED_PERIPHERAL 0
+#define SCYAN_IDLE_SCREENS_ENABLED_PERIPHERAL 1
 #define SCYAN_IDLE_TIMEOUT_MS_PERIPHERAL        30000
-#define SCYAN_SLEEP_TIMEOUT_MS_PERIPHERAL       25000
+#define SCYAN_SLEEP_TIMEOUT_MS_PERIPHERAL       60000
 /* Backward-compatible aliases for legacy firmware builds */
 #define SCYAN_IDLE_SCREENS_ENABLED_LEFT     SCYAN_IDLE_SCREENS_ENABLED_CENTRAL
 #define SCYAN_IDLE_TIMEOUT_MS_LEFT          SCYAN_IDLE_TIMEOUT_MS_CENTRAL
@@ -2442,35 +2442,28 @@ struct display_layout_block {
     uint16_t symbol_id;
 };
 
-static const struct display_layout_block LAYOUT_CENTRAL_ACTIVE_BLOCKS[9] = {
-    { .type = WIDGET_TYPE_BONGO, .x = 0, .y = 98, .width = 32, .height = 23, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 3, .symbol_ids = { SYMBOL_SLICE_40_4046, SYMBOL_SLICE_40_4046_SUB_1, SYMBOL_SLICE_40_4046_SUB_2 }, .text_count = 1, .text_entries = { "(=^.^=)" }, .custom_text = "(=^.^=)", .symbol_id = SYMBOL_SLICE_40_4046 },
-    { .type = WIDGET_TYPE_WPM_CHART, .x = 0, .y = 55, .width = 32, .height = 30, .enabled = true, .mode = 0, .param1 = 0, .param2 = 60, .param3 = 10, .symbol_count = 1, .symbol_ids = { SYMBOL_USB }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_USB },
-    { .type = WIDGET_TYPE_OUTPUT_STATUS, .x = 1, .y = 0, .width = 12, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 6, .symbol_ids = { SYMBOL_USB, SYMBOL_BLUETOOTH_9659_SUB_1, SYMBOL_BLUETOOTH_9659_SUB_2, SYMBOL_BLUETOOTH_9659_SUB_3, SYMBOL_BLUETOOTH_9659_SUB_4, SYMBOL_BLUETOOTH_9659_SUB_5 }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_USB },
-    { .type = WIDGET_TYPE_BATTERY, .x = 14, .y = 0, .width = 17, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 14, .symbol_ids = { SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_BATTERY_FRAME }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGE_0960 },
-    { .type = WIDGET_TYPE_LAYER, .x = 5, .y = 14, .width = 22, .height = 11, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 5, .symbol_ids = { SYMBOL_BRACKET_LAYER_0, SYMBOL_BRACKET_LAYER_0, SYMBOL_BRACKET_LAYER_1, SYMBOL_BRACKET_LAYER_2, SYMBOL_BRACKET_LAYER_3 }, .text_count = 4, .text_entries = { "DEFAULT", "LOWER", "RAISE", "ADJUST" }, .custom_text = "DEFAULT", .symbol_id = SYMBOL_BRACKET_LAYER_0 },
-    { .type = WIDGET_TYPE_WPM, .x = 2, .y = 86, .width = 27, .height = 5, .enabled = true, .mode = 0, .param1 = 0, .param2 = 70, .param3 = 0, .symbol_count = 8, .symbol_ids = { SYMBOL_SPEEDOMETER_8803, SYMBOL_SPEEDOMETER_8803_SUB_1, SYMBOL_SPEEDOMETER_8803_SUB_2, SYMBOL_SPEEDOMETER_8803_SUB_3, SYMBOL_SPEEDOMETER_8803_SUB_4, SYMBOL_SPEEDOMETER_8803_SUB_5, SYMBOL_SPEEDOMETER_8803_SUB_6, SYMBOL_SPEEDOMETER_8803_SUB_7 }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_SPEEDOMETER_8803 },
-    { .type = WIDGET_TYPE_WPM, .x = 12, .y = 92, .width = 18, .height = 5, .enabled = true, .mode = 1, .param1 = 0, .param2 = 60, .param3 = 0, .symbol_count = 8, .symbol_ids = { SYMBOL_SPEEDOMETER_8803, SYMBOL_SPEEDOMETER_8803_SUB_1, SYMBOL_SPEEDOMETER_8803_SUB_2, SYMBOL_SPEEDOMETER_8803_SUB_3, SYMBOL_SPEEDOMETER_8803_SUB_4, SYMBOL_SPEEDOMETER_8803_SUB_5, SYMBOL_SPEEDOMETER_8803_SUB_6, SYMBOL_SPEEDOMETER_8803_SUB_7 }, .text_count = 6, .text_entries = { " ", "SLOW", "OK", "NICE", "GOOD", "WOW" }, .custom_text = " ", .symbol_id = SYMBOL_SPEEDOMETER_8803 },
-    { .type = WIDGET_TYPE_SPLIT, .x = 10, .y = 119, .width = 13, .height = 9, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 2, .symbol_ids = { SYMBOL_SPLIT_CONNECTED, SYMBOL_SPLIT_DISCONNECTED }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_SPLIT_CONNECTED },
-    { .type = WIDGET_TYPE_LAYER, .x = 1, .y = 25, .width = 31, .height = 29, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 4, .symbol_ids = { SYMBOL_SKULL_LAYER_0, SYMBOL_WOLF_RIGHT_2329, SYMBOL_WOLF_LEFT_7133, SYMBOL_WOLF_MAD_7312 }, .text_count = 4, .text_entries = { "DEFAULT", "LOWER", "RAISE", "ADJUST" }, .custom_text = "DEFAULT", .symbol_id = SYMBOL_SKULL_LAYER_0 },
+static const struct display_layout_block LAYOUT_CENTRAL_ACTIVE_BLOCKS[5] = {
+    { .type = WIDGET_TYPE_OUTPUT_STATUS, .x = 58, .y = 27, .width = 12, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 6, .symbol_ids = { SYMBOL_USB, SYMBOL_BLUETOOTH_9659_SUB_1, SYMBOL_BLUETOOTH_9659_SUB_2, SYMBOL_BLUETOOTH_9659_SUB_3, SYMBOL_BLUETOOTH_9659_SUB_4, SYMBOL_BLUETOOTH_9659_SUB_5 }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_USB },
+    { .type = WIDGET_TYPE_BATTERY, .x = 11, .y = 27, .width = 17, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 14, .symbol_ids = { SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_BATTERY_FRAME }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGE_0960 },
+    { .type = WIDGET_TYPE_LAYER, .x = 97, .y = 27, .width = 22, .height = 11, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 5, .symbol_ids = { SYMBOL_BRACKET_LAYER_0, SYMBOL_BRACKET_LAYER_0, SYMBOL_BRACKET_LAYER_1, SYMBOL_BRACKET_LAYER_2, SYMBOL_BRACKET_LAYER_3 }, .text_count = 4, .text_entries = { "DEFAULT", "LOWER", "RAISE", "ADJUST" }, .custom_text = "DEFAULT", .symbol_id = SYMBOL_BRACKET_LAYER_0 },
+    { .type = WIDGET_TYPE_CAPS_LOCK, .x = 78, .y = 28, .width = 14, .height = 7, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 2, .symbol_ids = { SYMBOL_SPLIT_CONNECTED, SYMBOL_SPLIT_DISCONNECTED }, .text_count = 2, .text_entries = { "a", "" }, .custom_text = "a", .symbol_id = SYMBOL_SPLIT_CONNECTED },
+    { .type = WIDGET_TYPE_BATTERY, .x = 35, .y = 28, .width = 17, .height = 10, .enabled = true, .mode = 1, .param1 = 4, .param2 = 0, .param3 = 0, .symbol_count = 16, .symbol_ids = { SYMBOL_BATTERY_FRAME, SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_CHARGESLIM_5317, SYMBOL_CHARGESLIM_5317_SUB_1 }, .text_count = 10, .text_entries = { "CHARGE NOW!", "LOW", "OK", "FULL", "5", "6", "7", "8", "9", "10" }, .custom_text = "CHARGE NOW!", .symbol_id = SYMBOL_BATTERY_FRAME },
 };
-#define LAYOUT_CENTRAL_ACTIVE_COUNT 9
+#define LAYOUT_CENTRAL_ACTIVE_COUNT 5
 
-static const struct display_layout_block LAYOUT_CENTRAL_IDLE_BLOCKS[3] = {
-    { .type = WIDGET_TYPE_SCREENSAVER, .x = 1, .y = 50, .width = 31, .height = 29, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 1, .symbol_ids = { SYMBOL_SKULL_LAYER_0 }, .text_count = 1, .text_entries = { "Scyan" }, .custom_text = "Scyan", .symbol_id = SYMBOL_SKULL_LAYER_0 },
-    { .type = WIDGET_TYPE_BATTERY, .x = 7, .y = 0, .width = 17, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 14, .symbol_ids = { SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_BATTERY_FRAME }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGE_0960 },
-    { .type = WIDGET_TYPE_BRANDING, .x = 6, .y = 82, .width = 21, .height = 5, .enabled = true, .mode = 1, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 1, .symbol_ids = { SYMBOL_USB }, .text_count = 1, .text_entries = { "Scyan" }, .custom_text = "Scyan", .symbol_id = SYMBOL_USB },
+static const struct display_layout_block LAYOUT_CENTRAL_IDLE_BLOCKS[1] = {
+    { .type = WIDGET_TYPE_OUTPUT_STATUS, .x = 55, .y = 27, .width = 12, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 6, .symbol_ids = { SYMBOL_USB, SYMBOL_BLUETOOTH_9659_SUB_1, SYMBOL_BLUETOOTH_9659_SUB_2, SYMBOL_BLUETOOTH_9659_SUB_3, SYMBOL_BLUETOOTH_9659_SUB_4, SYMBOL_BLUETOOTH_9659_SUB_5 }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_USB },
 };
-#define LAYOUT_CENTRAL_IDLE_COUNT 3
+#define LAYOUT_CENTRAL_IDLE_COUNT 1
 
-static const struct display_layout_block LAYOUT_PERIPHERAL_ACTIVE_BLOCKS[3] = {
-    { .type = WIDGET_TYPE_SPLIT, .x = 9, .y = 65, .width = 13, .height = 9, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 2, .symbol_ids = { SYMBOL_SPLIT_CONNECTED, SYMBOL_SPLIT_DISCONNECTED }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_SPLIT_CONNECTED },
-    { .type = WIDGET_TYPE_LOOP, .x = 0, .y = 9, .width = 32, .height = 55, .enabled = true, .mode = 0, .param1 = 150, .param2 = 0, .param3 = 0, .symbol_count = 54, .symbol_ids = { SYMBOL_DUCK_PIXEL_0414, SYMBOL_DUCK_PIXEL_0414_SUB_1, SYMBOL_DUCK_PIXEL_0414_SUB_2, SYMBOL_DUCK_PIXEL_0414_SUB_3, SYMBOL_DUCK_PIXEL_0414_SUB_4, SYMBOL_DUCK_PIXEL_0414_SUB_5, SYMBOL_DUCK_PIXEL_0414_SUB_6, SYMBOL_DUCK_PIXEL_0414_SUB_7, SYMBOL_DUCK_PIXEL_0414_SUB_8, SYMBOL_DUCK_PIXEL_0414_SUB_9, SYMBOL_DUCK_PIXEL_0414_SUB_10, SYMBOL_DUCK_PIXEL_0414_SUB_11, SYMBOL_DUCK_PIXEL_0414_SUB_12, SYMBOL_DUCK_PIXEL_0414_SUB_13, SYMBOL_DUCK_PIXEL_0414_SUB_14, SYMBOL_DUCK_PIXEL_0414_SUB_15 }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_DUCK_PIXEL_0414 },
-    { .type = WIDGET_TYPE_BATTERY, .x = 0, .y = 0, .width = 32, .height = 1, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 16, .symbol_ids = { SYMBOL_CHARGESLIM_5317, SYMBOL_CHARGESLIM_5317_SUB_1, SYMBOL_CHARGESLIM_5317_SUB_2, SYMBOL_CHARGESLIM_5317_SUB_3, SYMBOL_CHARGESLIM_5317_SUB_4, SYMBOL_CHARGESLIM_5317_SUB_5, SYMBOL_CHARGESLIM_5317_SUB_6, SYMBOL_CHARGESLIM_5317_SUB_7, SYMBOL_CHARGESLIM_5317_SUB_8, SYMBOL_CHARGESLIM_5317_SUB_9, SYMBOL_CHARGESLIM_5317_SUB_10, SYMBOL_CHARGESLIM_5317_SUB_11, SYMBOL_CHARGESLIM_5317_SUB_12, SYMBOL_CHARGESLIM_5317_SUB_13, SYMBOL_CHARGESLIM_5317_SUB_14, SYMBOL_CHARGESLIM_5317_SUB_15 }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGESLIM_5317 },
+static const struct display_layout_block LAYOUT_PERIPHERAL_ACTIVE_BLOCKS[2] = {
+    { .type = WIDGET_TYPE_BATTERY, .x = 7, .y = 55, .width = 17, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 14, .symbol_ids = { SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_BATTERY_FRAME }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGE_0960 },
+    { .type = WIDGET_TYPE_SPLIT, .x = 9, .y = 70, .width = 13, .height = 9, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 2, .symbol_ids = { SYMBOL_SPLIT_CONNECTED, SYMBOL_SPLIT_DISCONNECTED }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_SPLIT_CONNECTED },
 };
-#define LAYOUT_PERIPHERAL_ACTIVE_COUNT 3
+#define LAYOUT_PERIPHERAL_ACTIVE_COUNT 2
 
 static const struct display_layout_block LAYOUT_PERIPHERAL_IDLE_BLOCKS[1] = {
-    { .type = WIDGET_TYPE_SPLIT, .x = 10, .y = 119, .width = 13, .height = 9, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 2, .symbol_ids = { SYMBOL_SPLIT_CONNECTED, SYMBOL_SPLIT_DISCONNECTED }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_SPLIT_CONNECTED },
+    { .type = WIDGET_TYPE_BATTERY, .x = 8, .y = 56, .width = 17, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 14, .symbol_ids = { SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_BATTERY_FRAME }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGE_0960 },
 };
 #define LAYOUT_PERIPHERAL_IDLE_COUNT 1
 
@@ -2484,44 +2477,29 @@ static const struct display_layout_block LAYOUT_PERIPHERAL_IDLE_BLOCKS[1] = {
 #define LAYOUT_RIGHT_IDLE_BLOCKS    LAYOUT_PERIPHERAL_IDLE_BLOCKS
 #define LAYOUT_RIGHT_IDLE_COUNT     LAYOUT_PERIPHERAL_IDLE_COUNT
 
+static const struct display_layout_block LAYOUT_PERIPHERAL_2_ACTIVE_BLOCKS[2] = {
+    { .type = WIDGET_TYPE_BATTERY, .x = 8, .y = 55, .width = 17, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 14, .symbol_ids = { SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_BATTERY_FRAME }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGE_0960 },
+    { .type = WIDGET_TYPE_SPLIT, .x = 10, .y = 70, .width = 13, .height = 9, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 2, .symbol_ids = { SYMBOL_SPLIT_CONNECTED, SYMBOL_SPLIT_DISCONNECTED }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_SPLIT_CONNECTED },
+};
+#define LAYOUT_PERIPHERAL_2_ACTIVE_COUNT 2
+
+static const struct display_layout_block LAYOUT_PERIPHERAL_2_IDLE_BLOCKS[1] = {
+    { .type = WIDGET_TYPE_BATTERY, .x = 8, .y = 56, .width = 17, .height = 10, .enabled = true, .mode = 0, .param1 = 0, .param2 = 0, .param3 = 0, .symbol_count = 14, .symbol_ids = { SYMBOL_CHARGE_0960, SYMBOL_CHARGE_0960_SUB_1, SYMBOL_CHARGE_0960_SUB_2, SYMBOL_CHARGE_0960_SUB_3, SYMBOL_CHARGE_0960_SUB_4, SYMBOL_CHARGE_0960_SUB_5, SYMBOL_CHARGE_0960_SUB_6, SYMBOL_CHARGE_0960_SUB_7, SYMBOL_CHARGE_0960_SUB_8, SYMBOL_CHARGE_0960_SUB_9, SYMBOL_CHARGE_0960_SUB_10, SYMBOL_CHARGE_0960_SUB_11, SYMBOL_CHARGE_0960_SUB_12, SYMBOL_BATTERY_FRAME }, .text_count = 0, .text_entries = { NULL }, .custom_text = NULL, .symbol_id = SYMBOL_CHARGE_0960 },
+};
+#define LAYOUT_PERIPHERAL_2_IDLE_COUNT 1
+
 
 /* ZMK_DISPLAY_STUDIO_METADATA
 {
   "version": 1,
   "centralBlocks": [
     {
-      "id": "block-bongo-1789066888541",
-      "widgetType": "bongo",
-      "instanceId": "bongo-1788845743513",
-      "name": "Bongo Cat",
-      "x": 0,
-      "y": 98,
-      "width": 32,
-      "height": 23,
-      "enabled": true,
-      "description": "Reactive bongo mascot that taps paws to left/right keystrokes.",
-      "side": "left"
-    },
-    {
-      "id": "block-wpm-chart-1789067013977",
-      "widgetType": "wpm-chart",
-      "instanceId": "w_rpxxab",
-      "name": "WPM Chart",
-      "x": 0,
-      "y": 55,
-      "width": 32,
-      "height": 30,
-      "enabled": true,
-      "description": "Line chart widget of typing speed over time.",
-      "side": "left"
-    },
-    {
       "id": "block-connection-1789067017493",
       "widgetType": "connection",
       "instanceId": "connection-default",
       "name": "Output Status",
-      "x": 1,
-      "y": 0,
+      "x": 58,
+      "y": 27,
       "width": 12,
       "height": 10,
       "enabled": true,
@@ -2533,8 +2511,8 @@ static const struct display_layout_block LAYOUT_PERIPHERAL_IDLE_BLOCKS[1] = {
       "widgetType": "battery",
       "instanceId": "battery-default",
       "name": "Battery Meter",
-      "x": 14,
-      "y": 0,
+      "x": 11,
+      "y": 27,
       "width": 17,
       "height": 10,
       "enabled": true,
@@ -2546,8 +2524,8 @@ static const struct display_layout_block LAYOUT_PERIPHERAL_IDLE_BLOCKS[1] = {
       "widgetType": "layer-banner",
       "instanceId": "layer-banner-default",
       "name": "Layer Banner",
-      "x": 5,
-      "y": 14,
+      "x": 97,
+      "y": 27,
       "width": 22,
       "height": 11,
       "enabled": true,
@@ -2555,160 +2533,148 @@ static const struct display_layout_block LAYOUT_PERIPHERAL_IDLE_BLOCKS[1] = {
       "side": "left"
     },
     {
-      "id": "block-wpm-1789067083863",
-      "widgetType": "wpm",
-      "instanceId": "wpm-default",
-      "name": "WPM Meter",
-      "x": 2,
-      "y": 86,
-      "width": 27,
-      "height": 5,
+      "id": "block-caps-lock-1789799937881",
+      "widgetType": "caps-lock",
+      "instanceId": "caps-lock-1788790331442",
+      "name": "Caps Lock Indicator",
+      "x": 78,
+      "y": 28,
+      "width": 14,
+      "height": 7,
       "enabled": true,
-      "description": "Typing speed readout interpolating up to a target.",
-      "side": "left"
+      "description": "Caps lock indicator pill or [CAPS] text indicator.",
+      "side": "central"
     },
     {
-      "id": "block-wpm-1789067088863",
-      "widgetType": "wpm",
-      "instanceId": "wpm-1788810469550",
-      "name": "WPM Meter",
-      "x": 12,
-      "y": 92,
-      "width": 18,
-      "height": 5,
-      "enabled": true,
-      "description": "Typing speed readout interpolating up to a target.",
-      "side": "left"
-    },
-    {
-      "id": "block-split-1789067098693",
-      "widgetType": "split",
-      "instanceId": "split-default",
-      "name": "Split Peripheral Link",
-      "x": 10,
-      "y": 119,
-      "width": 13,
-      "height": 9,
-      "enabled": true,
-      "description": "Wireless link status indicator between master and peripheral keyboard halves.",
-      "side": "left"
-    },
-    {
-      "id": "block-layer-banner-1789068679526",
-      "widgetType": "layer-banner",
-      "instanceId": "layer-banner-1788807043824",
-      "name": "Layer Banner",
-      "x": 1,
-      "y": 25,
-      "width": 31,
-      "height": 29,
-      "enabled": true,
-      "description": "Shows active keyboard layer frame brackets and text name.",
-      "side": "left"
-    }
-  ],
-  "peripheralBlocks": [
-    {
-      "id": "block-split-1789067121338",
-      "widgetType": "split",
-      "instanceId": "split-default",
-      "name": "Split Peripheral Link",
-      "x": 9,
-      "y": 65,
-      "width": 13,
-      "height": 9,
-      "enabled": true,
-      "description": "Wireless link status indicator between master and peripheral keyboard halves.",
-      "side": "right"
-    },
-    {
-      "id": "block-loop-1789087998630",
-      "widgetType": "loop",
-      "instanceId": "loop-1789087987167",
-      "name": "Loop",
-      "x": 0,
-      "y": 9,
-      "width": 32,
-      "height": 55,
-      "enabled": true,
-      "description": "Sequentially cycles through frames of a symbol group as an animated loop.",
-      "side": "right"
-    },
-    {
-      "id": "block-battery-1789135992776",
+      "id": "block-battery-1789799981212",
       "widgetType": "battery",
-      "instanceId": "battery-1789135980106",
+      "instanceId": "battery-1788811021435",
       "name": "Battery Meter",
-      "x": 0,
-      "y": 0,
-      "width": 32,
-      "height": 1,
-      "enabled": true,
-      "description": "Dynamic battery meter using symbol interpolation or custom text divisions.",
-      "side": "right"
-    }
-  ],
-  "idleCentralBlocks": [
-    {
-      "id": "block-screensaver-1789066928194",
-      "widgetType": "screensaver",
-      "instanceId": "screensaver-1788803033766",
-      "name": "Image",
-      "x": 1,
-      "y": 50,
-      "width": 31,
-      "height": 29,
-      "enabled": true,
-      "description": "Idle sleep graphic or animated mascot for idle keyboard display.",
-      "side": "left"
-    },
-    {
-      "id": "block-battery-1789066962227",
-      "widgetType": "battery",
-      "instanceId": "battery-default",
-      "name": "Battery Meter",
-      "x": 7,
-      "y": 0,
+      "x": 35,
+      "y": 28,
       "width": 17,
       "height": 10,
       "enabled": true,
       "description": "Dynamic battery meter using symbol interpolation or custom text divisions.",
-      "side": "left"
-    },
-    {
-      "id": "block-branding-1789066972162",
-      "widgetType": "branding",
-      "instanceId": "branding-1788796954172",
-      "name": "Text",
-      "x": 6,
-      "y": 82,
-      "width": 21,
-      "height": 5,
-      "enabled": true,
-      "description": "Custom username, keyboard name, or model banner text.",
-      "side": "left"
+      "side": "central"
     }
   ],
-  "idlePeripheralBlocks": [
+  "peripheralBlocks": [
     {
-      "id": "block-split-1789066910910",
+      "id": "block-battery-1789799996768",
+      "widgetType": "battery",
+      "instanceId": "battery-default",
+      "name": "Battery Meter",
+      "x": 7,
+      "y": 55,
+      "width": 17,
+      "height": 10,
+      "enabled": true,
+      "description": "Dynamic battery meter using symbol interpolation or custom text divisions.",
+      "side": "peripheral"
+    },
+    {
+      "id": "block-split-1789800013551",
       "widgetType": "split",
       "instanceId": "split-default",
       "name": "Split Peripheral Link",
-      "x": 10,
-      "y": 119,
+      "x": 9,
+      "y": 70,
       "width": 13,
       "height": 9,
       "enabled": true,
       "description": "Wireless link status indicator between master and peripheral keyboard halves.",
-      "side": "right"
+      "side": "peripheral"
     }
   ],
-  "screenDimensions": {
-    "width": 32,
-    "height": 128
+  "idleCentralBlocks": [
+    {
+      "id": "block-connection-1789800107388",
+      "widgetType": "connection",
+      "instanceId": "connection-default",
+      "name": "Output Status",
+      "x": 55,
+      "y": 27,
+      "width": 12,
+      "height": 10,
+      "enabled": true,
+      "description": "Active keystroke output: USB cable symbol or Bluetooth profile (P1-P5).",
+      "side": "central"
+    }
+  ],
+  "idlePeripheralBlocks": [
+    {
+      "id": "block-battery-1789800059162",
+      "widgetType": "battery",
+      "instanceId": "battery-default",
+      "name": "Battery Meter",
+      "x": 8,
+      "y": 56,
+      "width": 17,
+      "height": 10,
+      "enabled": true,
+      "description": "Dynamic battery meter using symbol interpolation or custom text divisions.",
+      "side": "peripheral"
+    }
+  ],
+  "peripheralScreens": {
+    "peripheral-2": {
+      "name": "Peripheral 2",
+      "blocks": [
+        {
+          "id": "peripheral-battery",
+          "widgetType": "battery",
+          "name": "Battery Meter",
+          "x": 8,
+          "y": 55,
+          "width": 17,
+          "height": 10,
+          "enabled": true,
+          "description": "Battery terminal frame and charge level",
+          "side": "peripheral"
+        },
+        {
+          "id": "peripheral-split",
+          "widgetType": "split",
+          "name": "Split Peripheral Link",
+          "x": 10,
+          "y": 70,
+          "width": 13,
+          "height": 9,
+          "enabled": true,
+          "description": "Wireless link status with master half",
+          "side": "peripheral"
+        }
+      ],
+      "idleBlocks": [
+        {
+          "id": "block-battery-1789800067105",
+          "widgetType": "battery",
+          "instanceId": "battery-default",
+          "name": "Battery Meter",
+          "x": 8,
+          "y": 56,
+          "width": 17,
+          "height": 10,
+          "enabled": true,
+          "description": "Dynamic battery meter using symbol interpolation or custom text divisions.",
+          "side": "peripheral-2"
+        }
+      ],
+      "screenDimensions": {
+        "width": 32,
+        "height": 128
+      },
+      "idleScreensEnabled": true,
+      "idleTimeoutSec": 30,
+      "screenOffTimeoutSec": 60
+    }
   },
-  "rotation": 90,
+  "screenDimensions": {
+    "width": 128,
+    "height": 64
+  },
+  "rotation": 0,
   "widgetInstances": {
     "status-bar": [
       {
@@ -3046,7 +3012,7 @@ static const struct display_layout_block LAYOUT_PERIPHERAL_IDLE_BLOCKS[1] = {
         },
         "config": {
           "mode": "symbol",
-          "groupId": "SYMBOL_CAPSA_9310",
+          "groupId": "SYMBOL_SPLIT_CONNECTED",
           "textEntries": [
             "a",
             ""
@@ -3157,14 +3123,21 @@ static const struct display_layout_block LAYOUT_PERIPHERAL_IDLE_BLOCKS[1] = {
   },
   "peripheralRotation": 90,
   "rightRotation": 90,
+  "peripheralIdleScreensEnabled": true,
   "peripheralIdleTimeoutSec": 30,
-  "peripheralScreenOffTimeoutSec": 25,
+  "peripheralScreenOffTimeoutSec": 60,
   "enabledScreens": [
     "central",
-    "peripheral"
+    "peripheral",
+    "peripheral-2"
   ],
   "shieldId": "corne",
-  "displayAssignments": {},
+  "displayAssignments": {
+    "eyeslash-corne-central-dongle": "central",
+    "dongle-display": "peripheral",
+    "eyeslash-corne-peripheral-left": "peripheral-2",
+    "nice-view-custom": null
+  },
   "layerNames": [
     "DEFAULT",
     "LOWER",
