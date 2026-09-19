@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/tokyo2006
     - name: englmaxi
       url-base: https://github.com/englmaxi
+    - name: brunowb
+      url-base: https://github.com/BrunoWB
   projects:
     - name: zmk
       remote: cormoran
@@ -37,5 +39,8 @@ manifest:
     - name: zmk-dongle-display
       remote: englmaxi
       revision: v0.3
+    - name: scyan-zmk-module
+      remote: brunowb
+      revision: main
   self:
     path: config
